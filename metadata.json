@@ -1,0 +1,6 @@
+{
+  "name": "SaaS Landing Page",
+  "description": "A modern SaaS landing page with hero, testimonials, and stats sections.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

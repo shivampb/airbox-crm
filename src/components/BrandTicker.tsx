@@ -73,7 +73,7 @@ export function BrandTicker() {
         <motion.div 
           className="flex w-max"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ ease: "linear", duration: 25, repeat: Infinity }}
+          transition={{ ease: "linear", duration: 60, repeat: Infinity }}
         >
           {brands}
           {brands}

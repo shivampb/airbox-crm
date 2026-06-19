@@ -36,7 +36,7 @@ function VideoCard({ author }: { author: any }) {
     <div className="bg-white rounded-4xl overflow-hidden shadow-sm border border-gray-200 flex flex-col group/video">
       <div className="p-6 flex items-center justify-between">
          <div className="flex items-center gap-3">
-          <img src={author.avatar} alt="" className="w-12 h-12 rounded-full" />
+          <img src={author.avatar} alt={`${author.name} profile picture`} className="w-12 h-12 rounded-full" />
           <div>
             <div className="font-semibold text-[15px] flex items-center gap-1 text-gray-900">
               {author.name}
@@ -153,7 +153,7 @@ function TextCard({ quote, author }: { quote: string, author: any }) {
       </p>
       <div className="flex items-center justify-between">
          <div className="flex items-center gap-3">
-            <img src={author.avatar} alt="" className="w-12 h-12 rounded-full" />
+            <img src={author.avatar} alt={`${author.name} profile picture`} className="w-12 h-12 rounded-full" />
             <div>
               <div className="font-semibold text-[15px] flex items-center gap-1 text-gray-900">
                 {author.name}
@@ -184,7 +184,7 @@ export function Testimonials() {
           <motion.div
             className="flex gap-6 pr-6 w-max"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ ease: "linear", duration: 40, repeat: Infinity }}
+            transition={{ ease: "linear", duration: 90, repeat: Infinity }}
           >
             {[...testimonials, ...testimonials].map((testimonial, i) => (
                <div key={i} className="w-[300px] shrink-0">

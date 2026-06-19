@@ -665,7 +665,7 @@ export function Hero() {
 
   return (
     <>
-      <section className="pt-32 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className="pt-20 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="flex flex-col gap-8">
         {/* Text Content */}
         <motion.h1 
@@ -674,7 +674,7 @@ export function Hero() {
           transition={{ duration: 0.5 }}
           className="text-4xl sm:text-5xl lg:text-7xl font-bold text-gray-900 tracking-tighter leading-[1.1] max-w-3xl sm:whitespace-nowrap"
         >
-          Stop Switching CRMs.<br /> Start Closing Deals.
+          Stop Switching CRMs.<br /> Start <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#3b82f6,#8b5cf6,#ec4899,#06b6d4,#3b82f6)] bg-[length:200%_auto] animate-[gradient_12s_linear_infinite]">Closing Deals</span>.
         </motion.h1>
         
         <div className="flex flex-col md:flex-row gap-8 md:items-center justify-between">
@@ -709,7 +709,7 @@ export function Hero() {
       </div>
 
       {/* Interactive Tabs */}
-      <div className="mt-20 border-b border-gray-200">
+      <div className="mt-12 border-b border-gray-200">
         <nav className="-mb-px flex space-x-6 sm:space-x-8 overflow-x-auto scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none" aria-label="Tabs">
           {tabConfig.map((tab, idx) => (
             <button

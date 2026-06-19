@@ -8,6 +8,7 @@ import { Hero } from './components/Hero';
 import { BrandTicker } from './components/BrandTicker';
 import { Testimonials } from './components/Testimonials';
 import { StatsFeatures } from './components/StatsFeatures';
+import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         <BrandTicker />
         <Testimonials />
         <StatsFeatures />
+        <FAQ />
       </main>
       <Footer />
     </div>

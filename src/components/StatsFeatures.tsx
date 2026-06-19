@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Shield, Sparkles, Send, MailOpen, Calendar } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 
@@ -225,7 +225,7 @@ Would you be open to a quick call this Thursday to review?</p>
            <div className="absolute left-[27px] top-6 bottom-6 w-0.5 bg-gray-100"></div>
            
            <div className="flex gap-4 relative z-10">
-              <div className="w-4 h-4 rounded-full bg-green-500 mt-0.5 flex-shrink-0 shadow-[0_0_0_4px_white]"></div>
+              <div className="w-4 h-4 rounded-full bg-green-500 mt-0.5 shrink-0 shadow-[0_0_0_4px_white]"></div>
               <div>
                  <div className="text-sm font-medium text-gray-900">Just now</div>
                  <div className="text-xs text-gray-500 mt-0.5">Opened in San Francisco, CA (Desktop)</div>
@@ -233,7 +233,7 @@ Would you be open to a quick call this Thursday to review?</p>
            </div>
            
            <div className="flex gap-4 relative z-10">
-              <div className="w-4 h-4 rounded-full bg-blue-500 mt-0.5 flex-shrink-0 shadow-[0_0_0_4px_white]"></div>
+              <div className="w-4 h-4 rounded-full bg-blue-500 mt-0.5 shrink-0 shadow-[0_0_0_4px_white]"></div>
               <div>
                  <div className="text-sm font-medium text-gray-900">2 hours ago</div>
                  <div className="text-xs text-gray-500 mt-0.5">Clicked link: "Pricing Calculator"</div>
@@ -241,7 +241,7 @@ Would you be open to a quick call this Thursday to review?</p>
            </div>
 
            <div className="flex gap-4 relative z-10">
-              <div className="w-4 h-4 rounded-full bg-gray-300 mt-0.5 flex-shrink-0 shadow-[0_0_0_4px_white]"></div>
+              <div className="w-4 h-4 rounded-full bg-gray-300 mt-0.5 shrink-0 shadow-[0_0_0_4px_white]"></div>
               <div>
                  <div className="text-sm font-medium text-gray-500">Yesterday, 9:00 AM</div>
                  <div className="text-xs text-gray-400 mt-0.5">First opened in New York, NY (Mobile)</div>
@@ -259,7 +259,7 @@ Would you be open to a quick call this Thursday to review?</p>
         <div className="bg-white p-6 rounded-xl shadow-lg border border-green-100 text-center relative overflow-hidden">
           <div className="absolute -right-6 -top-6 w-24 h-24 bg-green-100 rounded-full blur-2xl"></div>
           
-           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-400 to-green-600 text-white text-3xl font-bold shadow-lg shadow-green-500/30 mb-4 relative z-10">
+           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-linear-to-br from-green-400 to-green-600 text-white text-3xl font-bold shadow-lg shadow-green-500/30 mb-4 relative z-10">
               98
            </div>
            <h4 className="font-bold text-gray-900 mb-1 relative z-10">High Intent</h4>
@@ -272,6 +272,17 @@ Would you be open to a quick call this Thursday to review?</p>
 
 export function StatsFeatures() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % features.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [activeIndex, isPaused]);
 
   return (
     <section className="py-24 bg-white">
@@ -333,8 +344,12 @@ export function StatsFeatures() {
         </div>
 
         {/* Features Content visual representation */}
-         <div className="mx-auto max-w-5xl bg-white border border-gray-200 shadow-2xl p-0 sm:p-4 bg-gradient-to-br from-gray-50 to-white relative mt-8 md:mt-0 w-[calc(100%+2rem)] -translate-x-4 sm:translate-x-0 sm:w-full border-x-0 sm:border-x rounded-none sm:rounded-[2rem]">
-             <div className="rounded-none sm:rounded-[1.5rem] bg-gray-50 border-y sm:border border-gray-100 flex flex-col md:flex-row h-auto min-h-[500px] overflow-hidden">
+         <div 
+           onMouseEnter={() => setIsPaused(true)}
+           onMouseLeave={() => setIsPaused(false)}
+           className="mx-auto max-w-5xl bg-white border border-gray-200 shadow-2xl p-0 sm:p-4 bg-linear-to-br from-gray-50 to-white relative mt-8 md:mt-0 w-[calc(100%+2rem)] -translate-x-4 sm:translate-x-0 sm:w-full border-x-0 sm:border-x rounded-none sm:rounded-4xl"
+         >
+             <div className="rounded-none sm:rounded-3xl bg-gray-50 border-y sm:border border-gray-100 flex flex-col md:flex-row h-auto min-h-[500px] overflow-hidden">
                 
                 <AnimatePresence mode="wait">
                   <motion.div 

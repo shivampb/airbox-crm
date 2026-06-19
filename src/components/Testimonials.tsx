@@ -1,12 +1,96 @@
+import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Play, BadgeCheck } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Play, Pause, BadgeCheck, Volume2, VolumeX } from 'lucide-react';
 
 const XLogo = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true" className="w-5 h-5 text-gray-400 fill-current">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 );
+
+function VideoCard({ author }: { author: any }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play().catch(err => console.log("Video play interrupted", err));
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-4xl overflow-hidden shadow-sm border border-gray-200 flex flex-col group/video">
+      <div className="p-6 flex items-center justify-between">
+         <div className="flex items-center gap-3">
+          <img src={author.avatar} alt="" className="w-12 h-12 rounded-full" />
+          <div>
+            <div className="font-semibold text-[15px] flex items-center gap-1 text-gray-900">
+              {author.name}
+              <BadgeCheck className="w-4 h-4 text-white fill-blue-500" />
+            </div>
+            <div className="text-sm text-gray-500">@{author.handle}</div>
+          </div>
+        </div>
+        <XLogo />
+      </div>
+      <div 
+        onClick={togglePlay}
+        className="relative aspect-4/5 bg-black cursor-pointer overflow-hidden group"
+      >
+        <video
+          ref={videoRef}
+          src="https://assets.mixkit.co/videos/preview/mixkit-businessman-working-on-his-laptop-34282-large.mp4"
+          loop
+          muted={isMuted}
+          playsInline
+          className="object-cover w-full h-full opacity-90 transition group-hover:scale-105 duration-700"
+          poster="https://plus.unsplash.com/premium_photo-1676998930907-796724570f0a?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        />
+        
+        {/* Play/Pause Overlay */}
+        <div className="absolute inset-0 bg-black/20 flex items-center justify-center transition-opacity opacity-100 group-hover:opacity-100">
+          <button 
+            className="w-16 h-16 bg-purple-600/90 hover:bg-purple-700 text-white rounded-full flex items-center justify-center transition shadow-xl transform group-hover:scale-110 duration-300"
+            aria-label={isPlaying ? "Pause" : "Play"}
+          >
+            {isPlaying ? (
+              <Pause className="w-6 h-6 fill-current text-white" />
+            ) : (
+              <Play className="w-6 h-6 ml-1 fill-current text-white" />
+            )}
+          </button>
+        </div>
+
+        {/* Video Control Bar */}
+        {isPlaying && (
+          <div className="absolute bottom-4 right-4 z-10 flex gap-2">
+            <button 
+              onClick={toggleMute}
+              className="w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center text-white backdrop-blur-sm transition"
+              aria-label={isMuted ? "Unmute" : "Mute"}
+            >
+              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 const testimonials = [
   {
@@ -62,7 +146,7 @@ const testimonials = [
 
 function TextCard({ quote, author }: { quote: string, author: any }) {
   return (
-    <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-200 flex flex-col h-max">
+    <div className="bg-white rounded-4xl p-8 shadow-sm border border-gray-200 flex flex-col h-max">
       <div className="text-6xl text-gray-900 font-serif leading-none h-8 mb-6">“</div>
       <p className="text-gray-800 text-[15px] leading-relaxed mb-8 flex-1">
         {quote}
@@ -122,29 +206,7 @@ export function Testimonials() {
           {/* Column 2 */}
           <div className="flex flex-col gap-6">
               {/* Media Card */}
-              <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-200 flex flex-col">
-                <div className="p-6 flex items-center justify-between">
-                   <div className="flex items-center gap-3">
-                    <img src={testimonials[0].author.avatar} alt="" className="w-12 h-12 rounded-full" />
-                    <div>
-                      <div className="font-semibold text-[15px] flex items-center gap-1 text-gray-900">
-                        {testimonials[0].author.name}
-                        <BadgeCheck className="w-4 h-4 text-white fill-blue-500" />
-                      </div>
-                      <div className="text-sm text-gray-500">@{testimonials[0].author.handle}</div>
-                    </div>
-                  </div>
-                  <XLogo />
-                </div>
-                <div className="relative aspect-[4/5] bg-gray-200">
-                   <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?w=600&auto=format&fit=crop&q=60" className="object-cover w-full h-full" alt="Video thumbnail" />
-                   <div className="absolute inset-0 flex items-center justify-center">
-                     <button className="w-16 h-16 bg-purple-500/90 rounded-full flex items-center justify-center cursor-pointer hover:bg-purple-600 transition-colors shadow-xl shadow-purple-500/30 text-white">
-                       <Play className="w-6 h-6 ml-1 fill-current" />
-                     </button>
-                   </div>
-                </div>
-              </div>
+              <VideoCard author={testimonials[0].author} />
 
                {/* Second text card */}
                <TextCard quote={testimonials[2].content} author={testimonials[2].author} />

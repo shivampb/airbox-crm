@@ -27,8 +27,8 @@ export function Navbar() {
 
           {/* Action Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <a href="#login" className="text-sm font-medium text-gray-700 hover:text-black">Login &gt;</a>
-            <a href="#signup" className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
+            <a href="https://app-airbox.netlify.app/sign-in" className="text-sm font-medium text-gray-700 hover:text-black">Login &gt;</a>
+            <a href="https://app-airbox.netlify.app/sign-up" className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
               Sign up
             </a>
           </div>
@@ -57,8 +57,8 @@ export function Navbar() {
               <a href="#case-studies" className="block text-base font-medium text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Case Studies</a>
               <a href="#resources" className="block text-base font-medium text-gray-900" onClick={() => setIsMobileMenuOpen(false)}>Resources</a>
               <div className="border-t border-gray-100 pt-4 flex flex-col gap-3">
-                <a href="#login" className="block text-center text-base font-medium text-gray-900 py-2" onClick={() => setIsMobileMenuOpen(false)}>Login</a>
-                <a href="#signup" className="block text-center px-4 py-3 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-black hover:bg-gray-800" onClick={() => setIsMobileMenuOpen(false)}>
+                <a href="https://app-airbox.netlify.app/sign-in" className="block text-center text-base font-medium text-gray-900 py-2" onClick={() => setIsMobileMenuOpen(false)}>Login</a>
+                <a href="https://app-airbox.netlify.app/sign-up" className="block text-center px-4 py-3 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-black hover:bg-gray-800" onClick={() => setIsMobileMenuOpen(false)}>
                   Sign up
                 </a>
               </div>
